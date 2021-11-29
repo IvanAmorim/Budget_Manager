@@ -1,6 +1,5 @@
 package com.pm.budgetmanager.data.Viewmodel
 
-import android.accounts.Account
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData

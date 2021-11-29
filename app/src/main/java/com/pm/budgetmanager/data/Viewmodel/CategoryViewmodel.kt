@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class CategoryViewmodel(application: Application): AndroidViewModel(application) {
     val readAllCategorys: LiveData<List<Category>>
+
     private val repository: CategoryRepository
 
     init {
@@ -19,6 +20,8 @@ class CategoryViewmodel(application: Application): AndroidViewModel(application)
         repository = CategoryRepository(categoryDao)
         readAllCategorys = repository.readAllCategorys
     }
+
+
 
     fun addCategory(category: Category){
         viewModelScope.launch(Dispatchers.IO){

@@ -7,7 +7,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions' //deprecated plugin
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: "androidx.navigation.safeargs"
 
 
 android {
@@ -19,6 +19,16 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+
+        kapt {
+
+            arguments {
+
+                arg("room.schemaLocation", "$projectDir/schemas")
+
+            }
+
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,12 +46,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-}
+    viewBinding {
+        enabled true
+    }
 
-/*
-    buildFeatures {
-        viewBinding = true
-    }*/
+}
 
 dependencies {
 
@@ -63,6 +72,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.5.0-beta01'
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
     // Dependencies for working with Architecture components

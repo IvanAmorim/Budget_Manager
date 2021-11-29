@@ -28,13 +28,13 @@ class TransactionViewmodel(application: Application): AndroidViewModel(applicati
 
     fun updateTransaction(transaction: Transactions){
         viewModelScope.launch(Dispatchers.IO){
-            repository.addTransactions(transaction)
+            repository.updateTransaction(transaction)
         }
     }
 
     fun deleteTransaction(transaction: Transactions){
         viewModelScope.launch(Dispatchers.IO){
-            repository.addTransactions(transaction)
+            repository.deleteTransaction(transaction)
         }
     }
 }

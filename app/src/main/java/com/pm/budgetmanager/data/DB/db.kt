@@ -1,6 +1,7 @@
 package com.pm.budgetmanager.data.DB
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -11,7 +12,7 @@ import com.pm.budgetmanager.data.entities.Accounts
 import com.pm.budgetmanager.data.entities.Category
 import com.pm.budgetmanager.data.entities.Transactions
 
-@Database(entities = [Accounts::class, Transactions::class, Category::class], version = 1, exportSchema = false)
+@Database(entities = [Accounts::class, Transactions::class, Category::class], version = 2, exportSchema = true,autoMigrations = [AutoMigration (from = 1, to = 2)])
 abstract class db: RoomDatabase() {
     abstract fun accountDao(): AccountDao
     abstract fun transactionsDao(): TransactionsDao

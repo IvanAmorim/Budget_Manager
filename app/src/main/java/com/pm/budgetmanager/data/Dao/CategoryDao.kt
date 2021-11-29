@@ -13,7 +13,7 @@ interface CategoryDao {
     @Update
     fun updateCategory(category: Category)
 
-    @Query("SELECT * FROM category ORDER BY id ASC")
+    @Query("SELECT * FROM category ORDER BY id DESC")
     fun readAllCategorys(): LiveData<List<Category>>
 
     @Delete

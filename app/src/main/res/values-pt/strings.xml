@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Budget Manager</string>
+    <string name="insert_account">Inserir conta</string>
+    <string name="name">Nome</string>
+    <string name="balance">Saldo</string>
+    <string name="update_account">Atualizar conta</string>
+    <string name="delete">Eliminar</string>
+    <string name="insert_category">Inserir categoria</string>
+    <string name="select_category_type">Selecionar tipo de categoria</string>
+    <string name="earnings">Ganhos</string>
+    <string name="expenses">Gastos</string>
+    <string name="update_category">Atualizar categoria</string>
+    <string name="write_a_comment">Escreva um comentário</string>
+    <string name="List_accounts">Listar contas</string>
+    <string name="List_transactions">Listar transações</string>
+    <string name="Update">Atualizar</string>
+    <string name="List_category">Listar categorias</string>
+    <string name="Add_category">Adicionar categorias</string>
+    <string name="Update_category">Atualizar categorias</string>
+    <string name="Add_transaction">Adicionar transações</string>
+    <string name="UpdateTransaction">Atualizar transações</string>
+    <string name="language">Linguagem</string>
+    <string name="pick_date">Selecionar data</string>
+    <string name="comments">Comentários</string>
+    <string name="value">Valor</string>
+    <string name="Category">Categoria</string>
+    <string name="Account">Conta</string>
+    <string name="add_transaction">Adicionar transação</string>
+    <string name="transaction">Transação</string>
+</resources>

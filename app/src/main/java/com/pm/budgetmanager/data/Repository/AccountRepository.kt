@@ -1,6 +1,5 @@
 package com.pm.budgetmanager.data.Repository
 
-import android.accounts.Account
 import androidx.lifecycle.LiveData
 import com.pm.budgetmanager.data.Dao.AccountDao
 import com.pm.budgetmanager.data.entities.Accounts

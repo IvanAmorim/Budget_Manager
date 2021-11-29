@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/listAccountFragment"
-        android:name="com.pm.budgetmanager.fragments.Account.ListAccountFragment"
-        android:label="fragment_list_account"
+        android:name="com.pm.budgetmanager.fragments.Account.list.ListAccountFragment"
+        android:label="@string/List_accounts"
         tools:layout="@layout/fragment_list_account" >
         <action
             android:id="@+id/action_listAccountFragment_to_addAccountFragment"
@@ -16,11 +16,23 @@
         <action
             android:id="@+id/action_listAccountFragment_to_listTransactionsFragment"
             app:destination="@id/listTransactionsFragment" />
+        <action
+            android:id="@+id/action_listAccountFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_listAccountFragment_to_listCategoryFragment"
+            app:destination="@id/listCategoryFragment" />
+        <action
+            android:id="@+id/action_listAccountFragment_to_addTransactionFragment"
+            app:destination="@id/addTransactionFragment" />
+        <action
+            android:id="@+id/action_listAccountFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
-        android:name="com.pm.budgetmanager.fragments.Account.addAccountFragment"
-        android:label="fragment_add_account"
+        android:name="com.pm.budgetmanager.fragments.Account.add.AddAccountFragment"
+        android:label="@string/List_accounts"
         tools:layout="@layout/fragment_add_account" >
         <action
             android:id="@+id/action_addAccountFragment_to_listAccountFragment"
@@ -28,11 +40,91 @@
     </fragment>
     <fragment
         android:id="@+id/listTransactionsFragment"
-        android:name="com.pm.budgetmanager.fragments.Transaction.ListTransactionsFragment"
-        android:label="fragment_list_transactions"
+        android:name="com.pm.budgetmanager.fragments.Transaction.list.ListTransactionsFragment"
+        android:label="@string/List_transactions"
         tools:layout="@layout/fragment_list_transactions" >
         <action
             android:id="@+id/action_listTransactionsFragment_to_listAccountFragment"
             app:destination="@id/listAccountFragment" />
+        <action
+            android:id="@+id/action_listTransactionsFragment_to_listCategoryFragment"
+            app:destination="@id/listCategoryFragment" />
+        <action
+            android:id="@+id/action_listTransactionsFragment_to_addTransactionFragment"
+            app:destination="@id/addTransactionFragment" />
+        <action
+            android:id="@+id/action_listTransactionsFragment_to_updateTransaction"
+            app:destination="@id/updateTransaction" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.pm.budgetmanager.fragments.Account.update.UpdateFragment"
+        android:label="@string/Update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_listAccountFragment"
+            app:destination="@id/listAccountFragment" />
+        <argument
+            android:name="currentAccount"
+            app:argType="com.pm.budgetmanager.data.entities.Accounts" />
+    </fragment>
+    <fragment
+        android:id="@+id/listCategoryFragment"
+        android:name="com.pm.budgetmanager.fragments.Category.list.listCategoryFragment"
+        android:label="@string/List_category"
+        tools:layout="@layout/fragment_list_category" >
+        <action
+            android:id="@+id/action_listCategoryFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
+        <action
+            android:id="@+id/action_listCategoryFragment_to_updateCategoryFragment"
+            app:destination="@id/updateCategoryFragment" />
+        <action
+            android:id="@+id/action_listCategoryFragment_to_listAccountFragment"
+            app:destination="@id/listAccountFragment" />
+        <action
+            android:id="@+id/action_listCategoryFragment_to_listTransactionsFragment"
+            app:destination="@id/listTransactionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="com.pm.budgetmanager.fragments.Category.add.addCategoryFragment"
+        android:label="@string/Add_category"
+        tools:layout="@layout/fragment_add_category" >
+        <action
+            android:id="@+id/action_addCategoryFragment_to_listCategoryFragment"
+            app:destination="@id/listCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCategoryFragment"
+        android:name="com.pm.budgetmanager.fragments.Category.update.updateCategoryFragment"
+        android:label="@string/Update_category" >
+        <action
+            android:id="@+id/action_updateCategoryFragment_to_listCategoryFragment"
+            app:destination="@id/listCategoryFragment" />
+        <argument
+            android:name="currentCategory"
+            app:argType="com.pm.budgetmanager.data.entities.Category" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTransactionFragment"
+        android:name="com.pm.budgetmanager.fragments.Transaction.add.addTransactionFragment"
+        android:label="@string/Add_transaction"
+        tools:layout="@layout/fragment_add_transaction" >
+        <action
+            android:id="@+id/action_addTransactionFragment_to_listTransactionsFragment"
+            app:destination="@id/listTransactionsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateTransaction"
+        android:name="com.pm.budgetmanager.fragments.Transaction.update.UpdateTransaction"
+        android:label="@string/UpdateTransaction" >
+        <action
+            android:id="@+id/action_updateTransaction_to_listTransactionsFragment"
+            app:destination="@id/listTransactionsFragment" />
+        <argument
+            android:name="currentTransaction"
+            app:argType="com.pm.budgetmanager.data.entities.Transactions" />
     </fragment>
 </navigation>

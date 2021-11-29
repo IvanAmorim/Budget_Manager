@@ -14,7 +14,7 @@ interface TransactionsDao {
     @Update
     fun updateTransaction(transaction: Transactions)
 
-    @Query("SELECT * FROM transactions ORDER BY id ASC")
+    @Query("SELECT * FROM transactions ORDER BY id DESC")
     fun readAllTransactions(): LiveData<List<Transactions>>
 
     @Delete

@@ -12,7 +12,7 @@ interface AccountDao {
     @Update
     fun updateAccount(accounts: Accounts)
 
-    @Query("SELECT * FROM accounts ORDER BY id ASC ")
+    @Query("SELECT * FROM accounts ORDER BY id DESC ")
     fun readAllAccounts(): LiveData<List<Accounts>>
 
     @Delete

@@ -1,6 +1,7 @@
 package com.pm.budgetmanager.data.entities
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -10,10 +11,11 @@ import kotlinx.android.parcel.Parcelize
 
 class Transactions (
     @PrimaryKey(autoGenerate = true)
-
     val id: Int,
-    val transactionCategory: Int,
-    val account: Int,
+    @ColumnInfo(defaultValue = "")
+    val transactionCategory: String,
+    @ColumnInfo(defaultValue = "")
+    val account: String,
     val date: String,
     val comments: String,
     val value: Float
