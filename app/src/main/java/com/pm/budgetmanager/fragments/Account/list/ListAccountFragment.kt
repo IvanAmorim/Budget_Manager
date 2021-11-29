@@ -7,9 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pm.budgetmanager.MainActivity
 import com.pm.budgetmanager.R
-import com.pm.budgetmanager.Utils.Utils.Companion.hideKeyboard
 import com.pm.budgetmanager.data.Viewmodel.AccountViewmodel
 import kotlinx.android.synthetic.main.fragment_list_account.view.*
 
@@ -37,8 +35,6 @@ class ListAccountFragment : Fragment() {
 
         view.floatingActionButton.setOnClickListener{
             findNavController().navigate(R.id.action_listAccountFragment_to_addAccountFragment)
-            //findNavController().navigate(R.id.action_listAccountFragment_to_addTransactionFragment)
-            //findNavController().navigate(R.id.action_listAccountFragment_to_listCategoryFragment)
         }
         view.bt_category.setOnClickListener{
             findNavController().navigate(R.id.action_listAccountFragment_to_listCategoryFragment)
@@ -47,24 +43,6 @@ class ListAccountFragment : Fragment() {
             findNavController().navigate(R.id.action_listAccountFragment_to_listTransactionsFragment)
         }
 
-
-     //   setHasOptionsMenu(true)
-
         return view
     }
-
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.save,menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_save){
-          // showChangeLang()
-
-        }
-        return super.onOptionsItemSelected(item)
-    }*/
-
-
-
 }

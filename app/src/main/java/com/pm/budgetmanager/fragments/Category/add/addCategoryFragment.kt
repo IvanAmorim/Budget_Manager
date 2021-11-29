@@ -28,7 +28,6 @@ class addCategoryFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-
         return view
     }
 
@@ -42,7 +41,6 @@ class addCategoryFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     private fun addCategory(){
         var transactionType: String = ""
@@ -58,8 +56,6 @@ class addCategoryFragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
-
-
 
         val category = Category(0,et_nameCategory.text.toString(),transactionType.toString() )
 

@@ -79,7 +79,6 @@ class updateCategoryFragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
-
     }
 
     private fun deleteCategory() {
@@ -96,8 +95,6 @@ class updateCategoryFragment : Fragment() {
         builder.setTitle("Delete ${args.currentCategory.name}?")
         builder.setMessage("Are you sure you want to delete ${args.currentCategory.name}")
         builder.create().show()
-
-
     }
 
     private fun inputcheck(transactionType:String): Boolean {

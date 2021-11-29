@@ -57,8 +57,6 @@ class addTransactionFragment : Fragment() {
             categoryList.forEach { category ->
                 branchListCategory.add(category.name)
             }
-
-          //  Toast.makeText(requireContext(), "branch "+branchListCategory.size.toString(),Toast.LENGTH_SHORT).show()
             branchListCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             mySpinnerCategory.setAdapter(branchListCategoryAdapter)
         })
@@ -86,10 +84,7 @@ class addTransactionFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-
         /**Date Picker**/
-
-
             _binding = FragmentAddTransactionBinding.bind(view)
 
             binding.apply {
@@ -114,11 +109,6 @@ class addTransactionFragment : Fragment() {
                     datePickerFragment.show(supportFragmentManager, "DatePickerFragment")
                 }
             }
-
-
-
-
-
         /**End date picker**/
     return view
     }
@@ -157,8 +147,8 @@ class addTransactionFragment : Fragment() {
 
         val transaction = Transactions(0,result,accountSpinner,selectedDate,txt_comments.text.toString(), value)
 
-          mTransactionViewModel.addTransaction(transaction)
-var account = Accounts(0,"",0f)
+        mTransactionViewModel.addTransaction(transaction)
+        var account = Accounts(0,"",0f)
         accountList.forEach { accounts ->
             if(accounts.name==accountSpinner)
             {
@@ -191,7 +181,5 @@ var account = Accounts(0,"",0f)
         val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount);
         return (TextUtils.isEmpty(mySpinner.selectedItem.toString()) || TextUtils.isEmpty(mySpinnerAccount.selectedItem.toString())
                 || TextUtils.isEmpty(selectedDate) || TextUtils.isEmpty(etn_value.text.toString()))
-
     }
-
 }

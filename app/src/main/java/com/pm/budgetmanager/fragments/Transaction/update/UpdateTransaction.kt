@@ -43,8 +43,6 @@ class UpdateTransaction : Fragment() {
     private val binding get() = _binding!!
     lateinit var selectedDate: String
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +54,6 @@ class UpdateTransaction : Fragment() {
         view.txt_commentsUpdate.setText(args.currentTransaction.comments)
         view.tvSelectedDateUpdate.setText(args.currentTransaction.date)
         selectedDate=args.currentTransaction.date
-
 
         setHasOptionsMenu(true)
 
@@ -100,8 +97,6 @@ class UpdateTransaction : Fragment() {
         })
 
         /**Date Picker**/
-
-
         _binding = FragmentUpdateTransactionBinding.bind(view)
 
         binding.apply {
@@ -128,7 +123,6 @@ class UpdateTransaction : Fragment() {
         }
 
         mTransactionViewModel = ViewModelProvider(this).get(TransactionViewmodel::class.java)
-
 
         return view
     }
@@ -187,8 +181,6 @@ class UpdateTransaction : Fragment() {
         builder.setTitle("Delete?")
         builder.setMessage("Are you sure you want to delete?")
         builder.create().show()
-
-
     }
 
     private fun isValid():Boolean {
@@ -196,7 +188,6 @@ class UpdateTransaction : Fragment() {
         val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount);
         return (TextUtils.isEmpty(mySpinner.selectedItem.toString()) || TextUtils.isEmpty(mySpinnerAccount.selectedItem.toString())
                 || TextUtils.isEmpty(selectedDate) || TextUtils.isEmpty(etn_value.text.toString()))
-
     }
 
 }
