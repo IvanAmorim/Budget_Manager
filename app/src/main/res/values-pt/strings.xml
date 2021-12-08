@@ -28,4 +28,7 @@
     <string name="Account">Conta</string>
     <string name="add_transaction">Adicionar transação</string>
     <string name="transaction">Transação</string>
+    <string name="added">Categoria adicionada com sucesso</string>
+    <string name="isValid">"Todos os campos devem ser preenchidos "</string>
+    <string name="Language_already_selected">Liguagem já selecionada</string>
 </resources>

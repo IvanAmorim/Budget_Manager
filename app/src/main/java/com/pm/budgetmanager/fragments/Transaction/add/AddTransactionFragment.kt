@@ -169,7 +169,7 @@ class addTransactionFragment : Fragment() {
 
         Toast.makeText(
             requireContext(),
-            "Category successfuly added.",
+            getString(R.string.added),
             Toast.LENGTH_LONG
         ).show()
 

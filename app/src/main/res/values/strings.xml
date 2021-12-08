@@ -33,6 +33,8 @@
     <string name="add_transaction">Add transaction</string>
     <string name="transaction">Transaction</string>
     <string name="isValid">All fields must be filled</string>
+    <string name="added">Category successfuly added.</string>
+    <string name="Language_already_selected">Language already selected!</string>
 
 
 </resources>
