@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         if(item.itemId == R.id.portuguese){
             setLocale("pt")
         }
+
         return super.onOptionsItemSelected(item)
     }
 

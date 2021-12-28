@@ -74,7 +74,8 @@ class UpdateTransaction : Fragment() {
 
             branchListCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             mySpinnerCategory.setAdapter(branchListCategoryAdapter)
-            mySpinnerCategory.setSelection(branchListCategory.indexOf(args.currentTransaction.transactionCategory))
+            //mySpinnerCategory.setSelection(categoryList))
+            //mySpinnerCategory.setSelection(branchListCategory.indexOf(args.currentTransaction.transactionCategory))
         })
 
         /** Spinner Account**/
@@ -162,9 +163,9 @@ class UpdateTransaction : Fragment() {
         val valueupdated:Float
         valueupdated = etn_valueUpdate.text.toString().toFloat()
 
-        val transaction = Transactions(args.currentTransaction.id,resultupdated,accountSpinnerupdated,selectedDate,txt_commentsUpdate.text.toString(), valueupdated)
+        //val transaction = Transactions(args.currentTransaction.id,resultupdated,accountSpinnerupdated,selectedDate,txt_commentsUpdate.text.toString(), valueupdated)
 
-        mTransactionViewModel.updateTransaction(transaction)
+       // mTransactionViewModel.updateTransaction(transaction)
 
         findNavController().navigate(R.id.action_updateTransaction_to_listTransactionsFragment)
     }

@@ -35,6 +35,16 @@
     <string name="isValid">All fields must be filled</string>
     <string name="added">Category successfuly added.</string>
     <string name="Language_already_selected">Language already selected!</string>
+    <string name="login">LogIn</string>
+    <string name="fill_username_and_password">Please fill username and password!</string>
+    <string name="signin">Sign In</string>
+    <string name="session_expired">Session expired</string>
+    <string name="session_expired_message">Session has been expired. Please sign in.</string>
+    <string name="api_error_something_went_wrong">Ups! Something went wrong. Please try again.</string>
+    <string name="error_something_went_wrong">Ups! Something went wrong. Please try again.</string>
+    <string name="hello">hello</string>
+    <string name="api_error_wrong_login">Wrong username or password.</string>
+    <string name="SIGNIN">Sign in</string>
 
 
 </resources>

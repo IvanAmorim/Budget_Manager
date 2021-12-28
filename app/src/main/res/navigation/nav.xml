@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/listAccountFragment">
+    app:startDestination="@id/image2">
 
     <fragment
         android:id="@+id/listAccountFragment"
@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_listAccountFragment_to_addCategoryFragment"
             app:destination="@id/addCategoryFragment" />
+        <action
+            android:id="@+id/action_listAccountFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
@@ -126,5 +129,25 @@
         <argument
             android:name="currentTransaction"
             app:argType="com.pm.budgetmanager.data.entities.Transactions" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_signIn"
+        android:name="com.pm.budgetmanager.fragment_signIn"
+        android:label="SignIn"
+        tools:layout="@layout/fragment_sign_in"
+
+        >
+        <action
+            android:id="@+id/action_fragment_signIn_to_listTransactionsFragment"
+            app:destination="@id/listTransactionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/image2"
+        android:name="com.pm.budgetmanager.image"
+        android:label="@string/SIGNIN"
+        tools:layout="@layout/fragment_image" >
+        <action
+            android:id="@+id/action_image2_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
 </navigation>

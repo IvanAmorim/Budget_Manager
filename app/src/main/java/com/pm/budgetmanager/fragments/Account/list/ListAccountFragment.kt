@@ -22,6 +22,8 @@ class ListAccountFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list_account, container, false)
 
+        setHasOptionsMenu(true)
+
         //Recycler view
         val adapter = ListAdapter()
         val recyclerView = view.recyclerview
@@ -43,6 +45,25 @@ class ListAccountFragment : Fragment() {
             findNavController().navigate(R.id.action_listAccountFragment_to_listTransactionsFragment)
         }
 
+
+
+
         return view
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.login, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.signin) {
+            openlogin()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private  fun openlogin(){
+        findNavController().navigate(R.id.action_image2_to_fragment_signIn)
     }
 }

@@ -138,16 +138,23 @@ class addTransactionFragment : Fragment() {
         val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount);
         val result : String
         val accountSpinner: String
+        var category_id :String
 
         result= mySpinner.selectedItem.toString()
+        categoryList.forEach {
+            if(result == it.name){
+              //  category_id= it.id;
+            }
+        }
+
         accountSpinner = mySpinnerAccount.selectedItem.toString()
 
         val value:Float
         value = etn_value.text.toString().toFloat()
 
-        val transaction = Transactions(0,result,accountSpinner,selectedDate,txt_comments.text.toString(), value)
+       //val transaction = Transactions(0,category_id,accountSpinner,selectedDate,txt_comments.text.toString(), value)
 
-        mTransactionViewModel.addTransaction(transaction)
+       //mTransactionViewModel.addTransaction(transaction)
         var account = Accounts(0,"",0f)
         accountList.forEach { accounts ->
             if(accounts.name==accountSpinner)
