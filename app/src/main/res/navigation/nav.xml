@@ -17,9 +17,6 @@
             android:id="@+id/action_listAccountFragment_to_listTransactionsFragment"
             app:destination="@id/listTransactionsFragment" />
         <action
-            android:id="@+id/action_listAccountFragment_to_updateFragment"
-            app:destination="@id/updateFragment" />
-        <action
             android:id="@+id/action_listAccountFragment_to_listCategoryFragment"
             app:destination="@id/listCategoryFragment" />
         <action
@@ -31,6 +28,9 @@
         <action
             android:id="@+id/action_listAccountFragment_to_fragment_signIn"
             app:destination="@id/fragment_signIn" />
+        <action
+            android:id="@+id/action_listAccountFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAccountFragment"
@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_addAccountFragment_to_listAccountFragment"
             app:destination="@id/listAccountFragment" />
+        <action
+            android:id="@+id/action_addAccountFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/listTransactionsFragment"
@@ -58,6 +61,9 @@
         <action
             android:id="@+id/action_listTransactionsFragment_to_updateTransaction"
             app:destination="@id/updateTransaction" />
+        <action
+            android:id="@+id/action_listTransactionsFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
@@ -69,7 +75,10 @@
             app:destination="@id/listAccountFragment" />
         <argument
             android:name="currentAccount"
-            app:argType="com.pm.budgetmanager.data.entities.Accounts" />
+            app:argType="com.pm.budgetmanager.API.models.Account" />
+        <action
+            android:id="@+id/action_updateFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/listCategoryFragment"
@@ -88,6 +97,9 @@
         <action
             android:id="@+id/action_listCategoryFragment_to_listTransactionsFragment"
             app:destination="@id/listTransactionsFragment" />
+        <action
+            android:id="@+id/action_listCategoryFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/addCategoryFragment"
@@ -97,6 +109,9 @@
         <action
             android:id="@+id/action_addCategoryFragment_to_listCategoryFragment"
             app:destination="@id/listCategoryFragment" />
+        <action
+            android:id="@+id/action_addCategoryFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/updateCategoryFragment"
@@ -107,7 +122,10 @@
             app:destination="@id/listCategoryFragment" />
         <argument
             android:name="currentCategory"
-            app:argType="com.pm.budgetmanager.data.entities.Category" />
+            app:argType="com.pm.budgetmanager.API.models.Categorys" />
+        <action
+            android:id="@+id/action_updateCategoryFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/addTransactionFragment"
@@ -117,6 +135,9 @@
         <action
             android:id="@+id/action_addTransactionFragment_to_listTransactionsFragment"
             app:destination="@id/listTransactionsFragment" />
+        <action
+            android:id="@+id/action_addTransactionFragment_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
 
     <fragment
@@ -128,7 +149,10 @@
             app:destination="@id/listTransactionsFragment" />
         <argument
             android:name="currentTransaction"
-            app:argType="com.pm.budgetmanager.data.entities.Transactions" />
+            app:argType="com.pm.budgetmanager.API.models.Transactions" />
+        <action
+            android:id="@+id/action_updateTransaction_to_fragment_signIn"
+            app:destination="@id/fragment_signIn" />
     </fragment>
     <fragment
         android:id="@+id/fragment_signIn"

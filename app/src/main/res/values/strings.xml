@@ -45,6 +45,30 @@
     <string name="hello">hello</string>
     <string name="api_error_wrong_login">Wrong username or password.</string>
     <string name="SIGNIN">Sign in</string>
+    <string name="success">Sucess</string>
+    <string name="ony_edit_your_reports1">only edit your reports</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="logout">logout</string>
+    <string name="logout_question">Exit</string>
+    <string name="fill_title_and_description">Please fill title and description!</string>
+    <string name="successfull_updated_account">Account has been successfully updated!</string>
+    <string name="successfull_deleted_account">Account has been successfully deleted!</string>
+    <string name="delete_account">Delete account</string>
+    <string name="question_delete_account">Are you sure you want delete this account?</string>
+    <string name="successfull_updated_category">Category has been successfully updated!</string>
+    <string name="fill_name_and_transactiontype">Please fill name and transaction type</string>
+    <string name="successfull_deleted_category">Category has been successfully deleted!</string>
+    <string name="delete_category">Delete category</string>
+    <string name="question_delete_category">Are you sure you want delete this category</string>
+    <string name="delete_transaction">Delete transaction</string>
+    <string name="question_delete_transaction">Are you sure</string>
+    <string name="successfull_updated_transaction">Transaction has been successfully updated!</string>
+    <string name="successfull_deleted_transaction">Transaction has been successfully deleted!</string>
+    <string name="fill_all_fields">Please fill in all fields!</string>
+    <string name="ony_edit_your_categorys">Edit only your categories</string>
+    <string name="only_edit_your_accounts">Edit only your accounts</string>
+    <string name="only_edit_your_transactions">Edit only your transactions</string>
 
 
 </resources>

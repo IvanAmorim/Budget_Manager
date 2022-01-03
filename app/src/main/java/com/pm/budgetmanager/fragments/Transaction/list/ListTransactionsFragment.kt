@@ -1,22 +1,37 @@
 package com.pm.budgetmanager.fragments.Transaction.list
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pm.budgetmanager.API.models.Categorys
+import com.pm.budgetmanager.API.models.Transactions
+import com.pm.budgetmanager.API.requests.CategorysApi
+import com.pm.budgetmanager.API.requests.TransactionsApi
+import com.pm.budgetmanager.API.retrofit.ServiceBuilder
 import com.pm.budgetmanager.R
+import com.pm.budgetmanager.Utils.Utils.Companion.getToken
+import com.pm.budgetmanager.Utils.Utils.Companion.getUserIdInSession
+import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
+import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
 import com.pm.budgetmanager.data.Viewmodel.TransactionViewmodel
+import com.pm.budgetmanager.fragments.Category.list.ListAdapter_category
+import kotlinx.android.synthetic.main.fragment_list_category.*
 import kotlinx.android.synthetic.main.fragment_list_transactions.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ListTransactionsFragment : Fragment() {
-    private lateinit var mTransactionViewmodel: TransactionViewmodel
+   // private lateinit var mTransactionViewmodel: TransactionViewmodel
 
+    private var _view : View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +39,11 @@ class ListTransactionsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list_transactions, container, false)
+        _view = view
 
+        getAndSetData(view)
 
+        /*
         //Recycler view
         val adapter = ListAdapterTransaction()
         val recyclerView = view.recyclerviewTransaction
@@ -36,7 +54,7 @@ class ListTransactionsFragment : Fragment() {
         mTransactionViewmodel.readAllTransactions.observe(viewLifecycleOwner, Observer { transaction ->
             adapter.setData(transaction)
         })
-
+*/
         view.floatingActionButtonTransaction.setOnClickListener{
             findNavController().navigate(R.id.action_listTransactionsFragment_to_addTransactionFragment)
         }
@@ -49,4 +67,76 @@ class ListTransactionsFragment : Fragment() {
         }
         return view
     }
+
+    private fun getAndSetData(view: View) {
+
+        view.llProgressBar.bringToFront()
+        view.llProgressBar.visibility = View.VISIBLE
+
+
+        val adapter = ListAdapterTransaction(getUserIdInSession())
+
+        val recyclerView = view.recyclerviewTransaction
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val request = ServiceBuilder.buildService(TransactionsApi::class.java)
+        val call = request.getTransactions(token = "Bearer ${getToken()}")
+
+        call.enqueue(object : Callback<List<Transactions>> {
+            override fun onResponse(call: Call<List<Transactions>>, response: Response<List<Transactions>>) {
+
+                llProgressBar.visibility = View.GONE
+
+                if (response.isSuccessful) {
+                    val transaction: List<Transactions> = response.body()!!
+                    adapter.setData(transaction)
+                } else {
+                    if (response.code() == 401) {
+                        unauthorized(navigatonHandlder = {
+                            findNavController().navigate(R.id.action_listTransactionsFragment_to_fragment_signIn)
+                        })
+                    } else {
+                        somethingWentWrong()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Transactions>>, t: Throwable) {
+                llProgressBar.visibility = View.GONE
+                somethingWentWrong()
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.login, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.signin) {
+            openlogin()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private  fun openlogin(){
+        findNavController().navigate(R.id.action_image2_to_fragment_signIn)
+    }
+
+    private fun logout() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            val preferences = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+            preferences.edit().putString("token", null).apply()
+            findNavController().navigate(R.id.action_listAccountFragment_to_fragment_signIn)
+        }
+        builder.setNegativeButton(getString(R.string.no)) { _, _ -> }
+        builder.setTitle(getString(R.string.logout))
+        builder.setMessage(getString((R.string.logout_question)))
+        builder.create().show()
+    }
+
 }

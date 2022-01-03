@@ -1,29 +1,45 @@
 package com.pm.budgetmanager.fragments.Transaction.list
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.pm.budgetmanager.API.models.Transactions
 import com.pm.budgetmanager.R
-import com.pm.budgetmanager.data.entities.Category
-import com.pm.budgetmanager.data.entities.Transactions
+import com.pm.budgetmanager.fragments.Account.list.ListAccountFragmentDirections
 import kotlinx.android.synthetic.main.custom_row_transaction.view.*
 import kotlinx.android.synthetic.main.custom_row_transaction.view.tv_categoryName
 
-class ListAdapterTransaction: RecyclerView.Adapter<ListAdapterTransaction.MyViewHolder>() {
+class ListAdapterTransaction(userIdInSession: String?): RecyclerView.Adapter<ListAdapterTransaction.MyViewHolder>() {
+
+    private var transactionList = emptyList<Transactions>()
+    private val _userIdInSession = userIdInSession
+    private var _ctx : Context?=null
+
 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {}
 
-    private var transactionList = emptyList<Transactions>()
-    private var categoryList = emptyList<Category>()
+ //   private var transactionList = emptyList<Transactions>()
+  //  private var categoryList = emptyList<Category>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(
+        _ctx = parent.context
+
+      /*  return MyViewHolder(
             LayoutInflater.from(
                 parent.context
             ).inflate(R.layout.custom_row_transaction, parent, false)
+        )*/
+        return ListAdapterTransaction.MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.custom_row_transaction,
+                parent,
+                false
+            )
         )
     }
 
@@ -35,10 +51,10 @@ class ListAdapterTransaction: RecyclerView.Adapter<ListAdapterTransaction.MyView
         val currentTransaction = transactionList[position]
 
         holder.itemView.tv_id.text = currentTransaction.id.toString()
-     //   holder.itemView.tv_categoryName.text = categoryList.get(currentTransaction.transactionCategory).name.toString()
+        holder.itemView.tv_categoryName.text = currentTransaction.category_name
         holder.itemView.tv_transactionValue.text = currentTransaction.value.toString()
-        holder.itemView.tv_accountName.text = currentTransaction.account.toString()
-        holder.itemView.tv_comments.text = currentTransaction.comments.toString()
+        holder.itemView.tv_accountName.text = currentTransaction.account_Name
+        holder.itemView.tv_comments.text = currentTransaction.comments
 
         if(position%2 == 0){
             holder.itemView.rowLayoutTransaction.setBackgroundColor(Color.parseColor("#1A5B92"))
@@ -48,17 +64,19 @@ class ListAdapterTransaction: RecyclerView.Adapter<ListAdapterTransaction.MyView
         }
 
         holder.itemView.rowLayoutTransaction.setOnClickListener{
-            val action = ListTransactionsFragmentDirections.actionListTransactionsFragmentToUpdateTransaction(currentTransaction)
-            holder.itemView.findNavController().navigate(action)
+            if(_userIdInSession == currentTransaction.users_id.toString()){
+                val action = ListTransactionsFragmentDirections.actionListTransactionsFragmentToUpdateTransaction(currentTransaction)
+                holder.itemView.findNavController().navigate(action)
+            }
+            else {
+                Toast.makeText(_ctx,R.string.only_edit_your_transactions, Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
     fun setData(transaction: List<Transactions>){
         this.transactionList = transaction
-        notifyDataSetChanged()
-    }
-    fun setDataCategory(category: List<Category>){
-        this.categoryList = category
         notifyDataSetChanged()
     }
 

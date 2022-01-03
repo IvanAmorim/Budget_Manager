@@ -9,18 +9,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.pm.budgetmanager.API.dto.AccountDto
+import com.pm.budgetmanager.API.dto.CategoryDto
+import com.pm.budgetmanager.API.requests.AccountApi
+import com.pm.budgetmanager.API.requests.CategorysApi
+import com.pm.budgetmanager.API.retrofit.ServiceBuilder
 import com.pm.budgetmanager.R
+import com.pm.budgetmanager.Utils.Utils.Companion.getToken
+import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
+import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
 import com.pm.budgetmanager.data.Viewmodel.CategoryViewmodel
 import com.pm.budgetmanager.data.entities.Category
+import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update_category.*
 import kotlinx.android.synthetic.main.fragment_update_category.radiogroup
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class updateCategoryFragment : Fragment() {
 
     private val args by navArgs<updateCategoryFragmentArgs>()
-    private lateinit var mCategoryViewmodel: CategoryViewmodel
+    //private lateinit var mCategoryViewmodel: CategoryViewmodel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +48,7 @@ class updateCategoryFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        mCategoryViewmodel = ViewModelProvider(this).get(CategoryViewmodel::class.java)
+        //mCategoryViewmodel = ViewModelProvider(this).get(CategoryViewmodel::class.java)
         return view
     }
 
@@ -64,7 +76,7 @@ class updateCategoryFragment : Fragment() {
         }
 
         if (inputcheck(transactionType)) {
-            val updatedCategory = Category(args.currentCategory.id, name, transactionType)
+          /*  val updatedCategory = Category(args.currentCategory.id, name, transactionType)
 
             mCategoryViewmodel.updateCategory(updatedCategory)
 
@@ -78,11 +90,67 @@ class updateCategoryFragment : Fragment() {
                 "Category name or type must have a value.",
                 Toast.LENGTH_LONG
             ).show()
+        }*/
+
+            val request = ServiceBuilder.buildService(CategorysApi::class.java)
+            val call = request.updateCategorys(
+                token = "Bearer ${getToken()}",
+                id = args.currentCategory.id,
+                name = name,
+                transactionType = transactionType
+            )
+
+            call.enqueue(object : Callback<CategoryDto> {
+                override fun onResponse(call: Call<CategoryDto>, response: Response<CategoryDto>) {
+                    if (response.isSuccessful) {
+                        val report: CategoryDto = response.body()!!
+
+                        if (report.status == "OK") {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.successfull_updated_category),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            findNavController().navigate(R.id.action_updateCategoryFragment_to_listCategoryFragment)
+                        } else {
+                            Toast.makeText(
+                                requireContext(), getString(
+                                    resources.getIdentifier(
+                                        report.message, "string",
+                                        context?.packageName
+                                    )
+                                ), Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+                        if (response.code() == 401) {
+                            unauthorized(navigatonHandlder = {
+                                findNavController().navigate(R.id.action_updateCategoryFragment_to_fragment_signIn)
+                            })
+                        } else {
+                            somethingWentWrong()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<CategoryDto>, t: Throwable) {
+                    somethingWentWrong()
+                }
+            })
+
+        }else{
+            return Toast.makeText(
+                requireContext(),
+                getString(R.string.fill_name_and_transactiontype),
+                Toast.LENGTH_LONG
+            ).show()
+
         }
+
     }
 
     private fun deleteCategory() {
-        val builder = AlertDialog.Builder(requireContext())
+       /* val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             mCategoryViewmodel.deleteCategory(args.currentCategory)
             Toast.makeText(
@@ -94,6 +162,62 @@ class updateCategoryFragment : Fragment() {
         builder.setNegativeButton("No") { _, _ -> }
         builder.setTitle("Delete ${args.currentCategory.name}?")
         builder.setMessage("Are you sure you want to delete ${args.currentCategory.name}")
+        builder.create().show()*/
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+
+            val request = ServiceBuilder.buildService(CategorysApi::class.java)
+            val call = request.deleteCategory(
+                token = "Bearer ${getToken()}",
+                id = args.currentCategory.id
+            )
+
+            call.enqueue(object : Callback<CategoryDto> {
+                override fun onResponse(call: Call<CategoryDto>, response: Response<CategoryDto>) {
+                    if (response.isSuccessful) {
+                        val report: CategoryDto = response.body()!!
+
+                        if(report.status == "OK") {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.successfull_deleted_category),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            findNavController().navigate(R.id.action_updateCategoryFragment_to_listCategoryFragment)
+                        }
+                        else {
+                            Toast.makeText(
+                                requireContext(), getString(
+                                    resources.getIdentifier(
+                                        report.message, "string",
+                                        context?.packageName
+                                    )
+                                ), Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                    } else {
+
+                        if(response.code() == 401){
+                            unauthorized(navigatonHandlder = {
+                                findNavController().navigate(R.id.action_updateCategoryFragment_to_fragment_signIn)
+                            })
+                        }
+                        else {
+                            somethingWentWrong()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<CategoryDto>, t: Throwable) {
+                    somethingWentWrong()
+                }
+            })
+        }
+        builder.setNegativeButton(getString(R.string.no)) { _, _ -> }
+        builder.setTitle(getString(R.string.delete_category))
+        builder.setMessage(getString(R.string.question_delete_category))
         builder.create().show()
     }
 

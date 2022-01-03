@@ -1,28 +1,43 @@
 package com.pm.budgetmanager.fragments.Account.list
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.findFragment
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.pm.budgetmanager.API.models.Account
 import com.pm.budgetmanager.R
 import com.pm.budgetmanager.data.entities.Accounts
 import kotlinx.android.synthetic.main.custom_row.view.*
 import com.pm.budgetmanager.fragments.Account.list.ListAccountFragment as ListAccountFragment1
 
-class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
+class ListAdapter(userIdInSession: String?): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
+
+    private var accountList = emptyList<Account>()
+    private  val _userIdInSession = userIdInSession
+    private  var  _ctx : Context? = null
 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {}
 
-    private var accountList = emptyList<Accounts>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false))
+        _ctx = parent.context
+
+        return ListAdapter.MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.custom_row,
+                parent,
+                false
+            )
+        )
+
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +47,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentAccount = accountList[position]
-        holder.itemView.txt_id.text = currentAccount.Id.toString()
+        holder.itemView.txt_id.text = currentAccount.id.toString()
         holder.itemView.txt_account.text = currentAccount.name
         holder.itemView.txt_balance.text = currentAccount.balance.toString()+" €"
 
@@ -45,16 +60,20 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
 
        holder.itemView.rowLayout.setOnClickListener{
-            val action = ListAccountFragmentDirections.actionListAccountFragmentToUpdateFragment(currentAccount)
-            holder.itemView.findNavController().navigate(action)
+           if(_userIdInSession == currentAccount.users_id.toString()){
+               val action =
+                   ListAccountFragmentDirections.actionListAccountFragmentToUpdateFragment(
+                       currentAccount
+                   )
+               holder.itemView.findNavController().navigate(action)
+           }
+           else {
+               Toast.makeText(_ctx,R.string.only_edit_your_accounts, Toast.LENGTH_LONG).show()
+           }
        }
-
-        holder.itemView.rowLayout.setOnClickListener {v ->
-            v.findNavController().navigate(ListAccountFragmentDirections.actionListAccountFragmentToUpdateFragment(currentAccount))
-        }
     }
 
-    fun setData(account: List<Accounts>){
+    fun setData(account: List<Account>){
         this.accountList = account
         notifyDataSetChanged()
     }
