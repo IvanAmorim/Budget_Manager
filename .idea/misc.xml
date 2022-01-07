@@ -17,6 +17,8 @@
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout-land/fragment_update_category.xml" value="0.1900352733686067" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout-land/fragment_update_transaction.xml" value="0.1900352733686067" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/activity_main.xml" value="0.2222222222222222" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/activity_maps.xml" value="0.22" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/activity_maps2.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/custom_row.xml" value="0.25" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/custom_row_add_transaction.xml" value="0.25" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/custom_row_transaction.xml" value="0.33" />
@@ -25,7 +27,8 @@
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_add_transaction.xml" value="0.33" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_blank.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_date_picker.xml" value="0.10677083333333333" />
-        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_image.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_first.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_image.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_list_account.xml" value="0.25" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_list_category.xml" value="0.25434439178515006" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout/fragment_list_transactions.xml" value="0.25" />

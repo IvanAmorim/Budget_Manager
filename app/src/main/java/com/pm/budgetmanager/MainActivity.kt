@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         if(item.itemId == R.id.portuguese){
             setLocale("pt")
         }
+        if(item.itemId == R.id.maps){
+            val intent = Intent(this@MainActivity, Maps::class.java)
+            startActivity(intent)
+        }
 
         return super.onOptionsItemSelected(item)
     }

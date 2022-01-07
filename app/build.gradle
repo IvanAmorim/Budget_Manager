@@ -49,6 +49,9 @@ android {
     viewBinding {
         enabled true
     }
+    buildFeatures {
+        viewBinding true
+    }
 
 }
 
@@ -116,4 +119,9 @@ dependencies {
     //caroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2-native-mt"
+
+    // maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

@@ -69,6 +69,10 @@
     <string name="ony_edit_your_categorys">Edit only your categories</string>
     <string name="only_edit_your_accounts">Edit only your accounts</string>
     <string name="only_edit_your_transactions">Edit only your transactions</string>
+    <string name="title_activity_maps">Maps</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
 
 </resources>
