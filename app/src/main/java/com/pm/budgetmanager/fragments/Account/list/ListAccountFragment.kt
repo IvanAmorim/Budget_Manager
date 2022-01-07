@@ -5,8 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pm.budgetmanager.API.models.Account
@@ -17,7 +15,6 @@ import com.pm.budgetmanager.Utils.Utils.Companion.getToken
 import com.pm.budgetmanager.Utils.Utils.Companion.getUserIdInSession
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
-import com.pm.budgetmanager.data.Viewmodel.AccountViewmodel
 import kotlinx.android.synthetic.main.fragment_list_account.*
 import kotlinx.android.synthetic.main.fragment_list_account.view.*
 import retrofit2.Call
@@ -68,8 +65,8 @@ class ListAccountFragment : Fragment() {
 
     private fun getAndSetData(view: View) {
 
-        view.llProgressBar.bringToFront()
-        view.llProgressBar.visibility = View.VISIBLE
+        view.llProgressBarListAccount.bringToFront()
+        view.llProgressBarListAccount.visibility = View.VISIBLE
 
 
         val adapter = ListAdapter(getUserIdInSession())
@@ -84,7 +81,7 @@ class ListAccountFragment : Fragment() {
         call.enqueue(object : Callback<List<Account>> {
             override fun onResponse(call: Call<List<Account>>, response: Response<List<Account>>) {
 
-                llProgressBar.visibility = View.GONE
+                llProgressBarListAccount.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val reports: List<Account> = response.body()!!
@@ -101,28 +98,30 @@ class ListAccountFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Account>>, t: Throwable) {
-                llProgressBar.visibility = View.GONE
+                llProgressBarListAccount.visibility = View.GONE
                 somethingWentWrong()
             }
         })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.login, menu)
+        inflater.inflate(R.menu.menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if (item.itemId == R.id.signin) {
-            openlogin()
+        if (item.itemId == R.id.ic_logout) {
+            logout()
         }
+
+        if(item.itemId == R.id.ic_refresh){
+            _view?.let { getAndSetData(it) }
+        }
+
 
         return super.onOptionsItemSelected(item)
     }
 
-    private  fun openlogin(){
-        findNavController().navigate(R.id.action_image2_to_fragment_signIn)
-    }
 
     private fun logout() {
         val builder = AlertDialog.Builder(requireContext())

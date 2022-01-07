@@ -10,9 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.pm.budgetmanager.API.models.Transactions
 import com.pm.budgetmanager.R
-import com.pm.budgetmanager.fragments.Account.list.ListAccountFragmentDirections
 import kotlinx.android.synthetic.main.custom_row_transaction.view.*
-import kotlinx.android.synthetic.main.custom_row_transaction.view.tv_categoryName
 
 class ListAdapterTransaction(userIdInSession: String?): RecyclerView.Adapter<ListAdapterTransaction.MyViewHolder>() {
 
@@ -34,7 +32,7 @@ class ListAdapterTransaction(userIdInSession: String?): RecyclerView.Adapter<Lis
                 parent.context
             ).inflate(R.layout.custom_row_transaction, parent, false)
         )*/
-        return ListAdapterTransaction.MyViewHolder(
+        return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.custom_row_transaction,
                 parent,

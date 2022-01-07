@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.Category.add.addCategoryFragmentAPI">
+    tools:context=".fragments.Category.add.addCategoryFragment">
 
 
     <TextView
@@ -97,6 +97,12 @@
             android:textSize="24sp" />
 
     </RadioGroup>
+
+    <include
+        android:id="@+id/llProgressBarAddCategory"
+        layout="@layout/progressbar"
+        android:visibility="gone" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

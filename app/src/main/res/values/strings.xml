@@ -45,7 +45,7 @@
     <string name="hello">hello</string>
     <string name="api_error_wrong_login">Wrong username or password.</string>
     <string name="SIGNIN">Sign in</string>
-    <string name="success">Sucess</string>
+    <string name="success">Success</string>
     <string name="ony_edit_your_reports1">only edit your reports</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
@@ -73,6 +73,10 @@
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="refresh">Refresh</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
 
 
 </resources>

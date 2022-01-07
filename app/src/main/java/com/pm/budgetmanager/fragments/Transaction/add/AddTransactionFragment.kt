@@ -1,14 +1,14 @@
+
 package com.pm.budgetmanager.fragments.Transaction.add
 
-import android.annotation.SuppressLint
-import android.content.Context
+
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pm.budgetmanager.API.dto.AccountDto
 import com.pm.budgetmanager.API.dto.TransactionsDto
@@ -23,37 +23,26 @@ import com.pm.budgetmanager.Utils.Utils.Companion.getToken
 import com.pm.budgetmanager.Utils.Utils.Companion.getUserIdInSession
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
-import com.pm.budgetmanager.data.Viewmodel.CategoryViewmodel
-import com.pm.budgetmanager.data.entities.Category
-/*import com.pm.budgetmanager.data.Dao.AccountDao_Impl
-import com.pm.budgetmanager.data.Viewmodel.AccountViewmodel
-import com.pm.budgetmanager.data.Viewmodel.CategoryViewmodel
-import com.pm.budgetmanager.data.Viewmodel.TransactionViewmodel
-import com.pm.budgetmanager.data.entities.Accounts
-import com.pm.budgetmanager.data.entities.Category
-import com.pm.budgetmanager.data.entities.Transactions*/
 import com.pm.budgetmanager.databinding.FragmentAddTransactionBinding
-import com.pm.budgetmanager.fragments.Account.update.UpdateFragment
 import kotlinx.android.synthetic.main.fragment_add_transaction.*
 import kotlinx.android.synthetic.main.fragment_add_transaction.view.*
-import kotlinx.coroutines.NonDisposableHandle.parent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class addTransactionFragment : Fragment() {
 
-     private lateinit var mCategoryViewmodel: CategoryViewmodel
+     //private lateinit var mCategoryViewmodel: CategoryViewmodel
     //private lateinit var mAccountViewmodel: AccountViewmodel
 
-     var categoryList = emptyList<Categorys>()
+     private var categoryList = emptyList<Categorys>()
     private var accountList = emptyList<Account>()
     private var branchListAcount: MutableList<String> = ArrayList()
     private var branchListCategory: MutableList<String> = ArrayList()
 
     private var _binding: FragmentAddTransactionBinding? = null
     private val binding get() = _binding!!
-    var selectedDate: String = ""
+    private var selectedDate: String = ""
 
     //private lateinit var mTransactionViewModel: TransactionViewmodel
 
@@ -136,32 +125,28 @@ class addTransactionFragment : Fragment() {
 
     private fun addTransaction() {
 
-        val mySpinner = requireView().findViewById<Spinner>(R.id.spinnerCategory);
-        val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount);
-        val result: String
-        val accountSpinner: String
+        val mySpinner = requireView().findViewById<Spinner>(R.id.spinnerCategory)
+        val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount)
         var category_id = -1
         var account_id = -1
 
-        result = mySpinner.selectedItem.toString()
+        val result: String = mySpinner.selectedItem.toString()
         categoryList.forEach {
             if (result == it.name) {
                 category_id = it.id
             }
         }
 
-        accountSpinner = mySpinnerAccount.selectedItem.toString()
+        val accountSpinner: String = mySpinnerAccount.selectedItem.toString()
         accountList.forEach {
             if (accountSpinner == it.name) {
                 account_id = it.id
             }
         }
 
-        val value: Float
-        value = etn_value.text.toString().toFloat()
+        val value: Float = etn_value.text.toString().toFloat()
 
-        val comments: String
-        comments = txt_comments.text.toString()
+        val comments: String = txt_comments.text.toString()
 
 
         //val transaction = Transactions(0,category_id,accountSpinner,selectedDate,txt_comments.text.toString(), value)
@@ -180,12 +165,10 @@ class addTransactionFragment : Fragment() {
                 accountList.forEach { account ->
                     if(account.id == account_id)
                     {
-                        Toast.makeText(requireContext(),"Balance: ${account.balance}",Toast.LENGTH_SHORT).show()
                         when(it.transactionType){
                             "earnings" -> account.balance+=value
                             "expenses" -> account.balance-=value
                             }
-                        Toast.makeText(requireContext(),"Balance after: ${account.balance}",Toast.LENGTH_SHORT).show()
                         update(account.id,account.name,account.balance)
                     }
 
@@ -208,23 +191,24 @@ class addTransactionFragment : Fragment() {
                     }
                 }
             }
-        }*/
+        }
 
-        // mAccountViewmodel.updateAccount(account)
+         mAccountViewmodel.updateAccount(account)
 
 
-        /*Toast.makeText(
+        Toast.makeText(
             requireContext(),
             getString(R.string.added),
             Toast.LENGTH_LONG
         ).show()
 */
+
         findNavController().navigate(R.id.action_addTransactionFragment_to_listTransactionsFragment)
     }
 
     private fun isValid(): Boolean {
-        val mySpinner = requireView().findViewById<Spinner>(R.id.spinnerCategory);
-        val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount);
+        val mySpinner = requireView().findViewById<Spinner>(R.id.spinnerCategory)
+        val mySpinnerAccount = requireView().findViewById<Spinner>(R.id.spinnerAccount)
         return (TextUtils.isEmpty(mySpinner.selectedItem.toString()) || TextUtils.isEmpty(
             mySpinnerAccount.selectedItem.toString()
         )
@@ -232,9 +216,9 @@ class addTransactionFragment : Fragment() {
     }
 
 
-    fun getCategorys(view : View){
-        view.llProgressBar.bringToFront()
-        view.llProgressBar.visibility = View.VISIBLE
+    private fun getCategorys(view : View){
+        view.llProgressBarAddTransaction.bringToFront()
+        view.llProgressBarAddTransaction.visibility = View.VISIBLE
 
 
         val request = ServiceBuilder.buildService(CategorysApi::class.java)
@@ -247,7 +231,7 @@ class addTransactionFragment : Fragment() {
                 response: Response<List<Categorys>>
             ) {
 
-                  view.llProgressBar.visibility = View.GONE
+                  view.llProgressBarAddTransaction.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val category: List<Categorys> = response.body()!!
@@ -265,22 +249,22 @@ class addTransactionFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Categorys>>, t: Throwable) {
-                llProgressBar.visibility = View.GONE
+                llProgressBarAddTransaction.visibility = View.GONE
                 somethingWentWrong()
             }
         })
     }
 
-    fun getAccounts(view :View) {
-        view.llProgressBar.bringToFront()
-        view.llProgressBar.visibility = View.VISIBLE
+    private fun getAccounts(view :View) {
+        view.llProgressBarAddTransaction.bringToFront()
+        view.llProgressBarAddTransaction.visibility = View.VISIBLE
         val request = ServiceBuilder.buildService(AccountApi::class.java)
         val call = request.getAccounts(token = "Bearer ${getToken()}")
 
         call.enqueue(object : Callback<List<Account>> {
             override fun onResponse(call: Call<List<Account>>, response: Response<List<Account>>) {
 
-                  this@addTransactionFragment.llProgressBar.visibility = View.GONE
+                 llProgressBarAddTransaction.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val account: List<Account> = response.body()!!
@@ -298,7 +282,7 @@ class addTransactionFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Account>>, t: Throwable) {
-                 this@addTransactionFragment.llProgressBar.visibility = View.GONE
+                 llProgressBarAddTransaction.visibility = View.GONE
                 somethingWentWrong()
             }
         })
@@ -314,7 +298,7 @@ class addTransactionFragment : Fragment() {
             android.R.layout.simple_spinner_item, branchListCategory
         )
 
-        val mySpinnerCategory = view.findViewById<Spinner>(R.id.spinnerCategory);
+        val mySpinnerCategory = view.findViewById<Spinner>(R.id.spinnerCategory)
 
         branchListCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mySpinnerCategory.adapter = branchListCategoryAdapter
@@ -325,29 +309,29 @@ class addTransactionFragment : Fragment() {
         this.accountList = account
         account.forEach { branchListAcount.add(it.name) }
 
-        var accounts : MutableList<String> = ArrayList()
+        val accounts : MutableList<String> = ArrayList()
         account.forEach { accounts.add(it.name) }
 
         val branchListAccountAdapter = ArrayAdapter(
             requireActivity(),
             android.R.layout.simple_spinner_item, branchListAcount
         )
-        val mySpinnerAccount = view.findViewById<Spinner>(R.id.spinnerAccount);
+        val mySpinnerAccount = view.findViewById<Spinner>(R.id.spinnerAccount)
 
         branchListAccountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mySpinnerAccount.adapter = branchListAccountAdapter
     }
 
 
-    fun addTransactions(
+    private fun addTransactions(
         category_id: Int,
         account_id: Int,
         selectedDate: String,
         comments: String,
         value: Float
     ) {
-      //  llProgressBar.bringToFront()
-       // llProgressBar.visibility = View.VISIBLE
+        llProgressBarAddTransaction.bringToFront()
+        llProgressBarAddTransaction.visibility = View.VISIBLE
         val request = ServiceBuilder.buildService(TransactionsApi::class.java)
         val call = request.createTransaction(
             token = "Bearer ${getToken()}",
@@ -365,7 +349,7 @@ class addTransactionFragment : Fragment() {
                 call: Call<TransactionsDto>,
                 response: Response<TransactionsDto>
             ) {
-               // llProgressBar.visibility = View.GONE
+//                llProgressBarAddTransaction.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val transaction: TransactionsDto = response.body()!!
@@ -398,15 +382,15 @@ class addTransactionFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<TransactionsDto>, t: Throwable) {
-                // llProgressBar.visibility = View.GONE
+                llProgressBarAddTransaction.visibility = View.GONE
                 somethingWentWrong()
             }
         })
 
     }
     fun update(id : Int, name : String, balance : Float){
-  //      llProgressBar.bringToFront()
- //       llProgressBar.visibility = View.VISIBLE
+   //     llProgressBarAddTransaction.bringToFront()
+   //     llProgressBarAddTransaction.visibility = View.VISIBLE
         val request = ServiceBuilder.buildService(AccountApi::class.java)
         val call = request.updateAccount(
             token = "Bearer ${getToken()}",
@@ -418,7 +402,7 @@ class addTransactionFragment : Fragment() {
         call.enqueue(object : Callback<AccountDto> {
 
             override fun onResponse(call: Call<AccountDto>, response: Response<AccountDto>) {
-//                llProgressBar.visibility = View.GONE
+//                llProgressBarAddTransaction.visibility = View.GONE
                 if (response.isSuccessful) {
                     val report: AccountDto = response.body()!!
 

@@ -3,12 +3,11 @@ package com.pm.budgetmanager
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import java.util.*
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val actionBar = supportActionBar
+        supportActionBar
 
         setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
        currentLanguage = intent.getStringExtra(currentLang).toString()
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(refresh)
         } else {
             Toast.makeText(
-                this@MainActivity, getString(R.string.Language_already_selected), Toast.LENGTH_SHORT).show();
+                this@MainActivity, getString(R.string.Language_already_selected), Toast.LENGTH_SHORT).show()
         }
     }
 

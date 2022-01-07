@@ -5,8 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pm.budgetmanager.API.models.Categorys
@@ -17,7 +15,6 @@ import com.pm.budgetmanager.Utils.Utils.Companion.getToken
 import com.pm.budgetmanager.Utils.Utils.Companion.getUserIdInSession
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
-import com.pm.budgetmanager.data.Viewmodel.CategoryViewmodel
 import kotlinx.android.synthetic.main.fragment_list_category.*
 import kotlinx.android.synthetic.main.fragment_list_category.view.*
 import retrofit2.Call
@@ -68,8 +65,8 @@ class listCategoryFragment : Fragment() {
        }
     private fun getAndSetData(view: View) {
 
-        view.llProgressBar.bringToFront()
-        view.llProgressBar.visibility = View.VISIBLE
+        view.llProgressBarListCategory.bringToFront()
+        view.llProgressBarListCategory.visibility = View.VISIBLE
 
 
         val adapter = ListAdapter_category(getUserIdInSession())
@@ -84,7 +81,7 @@ class listCategoryFragment : Fragment() {
         call.enqueue(object : Callback<List<Categorys>> {
             override fun onResponse(call: Call<List<Categorys>>, response: Response<List<Categorys>>) {
 
-                 llProgressBar.visibility = View.GONE
+                 view.llProgressBarListCategory.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val category: List<Categorys> = response.body()!!
@@ -101,27 +98,28 @@ class listCategoryFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Categorys>>, t: Throwable) {
-                llProgressBar.visibility = View.GONE
+                llProgressBarListCategory.visibility = View.GONE
                 somethingWentWrong()
             }
         })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.login, menu)
+        inflater.inflate(R.menu.menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if (item.itemId == R.id.signin) {
-            openlogin()
+        if (item.itemId == R.id.ic_logout) {
+            logout()
         }
 
-        return super.onOptionsItemSelected(item)
-    }
+        if(item.itemId == R.id.ic_refresh){
+            _view?.let { getAndSetData(it) }
+        }
 
-    private  fun openlogin(){
-        findNavController().navigate(R.id.action_image2_to_fragment_signIn)
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun logout() {
@@ -129,7 +127,7 @@ class listCategoryFragment : Fragment() {
         builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
             val preferences = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
             preferences.edit().putString("token", null).apply()
-            findNavController().navigate(R.id.action_listAccountFragment_to_fragment_signIn)
+            findNavController().navigate(R.id.action_listCategoryFragment_to_fragment_signIn)
         }
         builder.setNegativeButton(getString(R.string.no)) { _, _ -> }
         builder.setTitle(getString(R.string.logout))

@@ -8,7 +8,7 @@
 
 
     <include
-        android:id="@+id/llProgressBar"
+        android:id="@+id/llProgressBarUpdateTransaction"
         layout="@layout/progressbar"
         android:layout_width="0dp"
         android:layout_height="0dp"

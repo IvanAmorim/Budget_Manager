@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Account.add.AddAccountFragmentAPI"
+    tools:context=".fragments.Account.add.AddAccountFragment"
     >
 
-
+    <include
+        android:id="@+id/llProgressBarAddAccount"
+        layout="@layout/progressbar"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

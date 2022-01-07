@@ -7,16 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.findFragment
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.pm.budgetmanager.API.models.Account
 import com.pm.budgetmanager.R
-import com.pm.budgetmanager.data.entities.Accounts
 import kotlinx.android.synthetic.main.custom_row.view.*
-import com.pm.budgetmanager.fragments.Account.list.ListAccountFragment as ListAccountFragment1
 
 class ListAdapter(userIdInSession: String?): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -30,7 +25,7 @@ class ListAdapter(userIdInSession: String?): RecyclerView.Adapter<ListAdapter.My
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         _ctx = parent.context
 
-        return ListAdapter.MyViewHolder(
+        return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.custom_row,
                 parent,
@@ -72,6 +67,7 @@ class ListAdapter(userIdInSession: String?): RecyclerView.Adapter<ListAdapter.My
            }
        }
     }
+
 
     fun setData(account: List<Account>){
         this.accountList = account

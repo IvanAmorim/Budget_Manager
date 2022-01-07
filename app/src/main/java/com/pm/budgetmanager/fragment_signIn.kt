@@ -3,11 +3,11 @@ package com.pm.budgetmanager
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.pm.budgetmanager.API.dto.UserDto
 import com.pm.budgetmanager.API.requests.UsersApi
@@ -16,8 +16,6 @@ import com.pm.budgetmanager.Utils.Utils.Companion.hideKeyboard
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.fragment_sign_in.view.*
-import kotlinx.android.synthetic.main.fragment_update_category.*
-import kotlinx.android.synthetic.main.fragment_update_transaction.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,11 +44,11 @@ class fragment_signIn : Fragment() {
             Toast.makeText(requireContext(), getString(R.string.fill_username_and_password), Toast.LENGTH_LONG).show()
         }
         else {
-            signinRequest(view)
+            signinRequest()
         }
     }
 
-    private fun signinRequest(view: View){
+    private fun signinRequest() {
         val request = ServiceBuilder.buildService(UsersApi::class.java)
         val call = request.signin(et_username.text.toString(), et_password.text.toString())
 

@@ -1,13 +1,10 @@
 package com.pm.budgetmanager.fragments.Account.add
 
-import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pm.budgetmanager.API.dto.AccountDto
 import com.pm.budgetmanager.API.requests.AccountApi
@@ -17,18 +14,14 @@ import com.pm.budgetmanager.Utils.Utils.Companion.getToken
 import com.pm.budgetmanager.Utils.Utils.Companion.getUserIdInSession
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
-import com.pm.budgetmanager.data.Viewmodel.AccountViewmodel
-import com.pm.budgetmanager.data.entities.Accounts
 import kotlinx.android.synthetic.main.fragment_add_account.*
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class AddAccountFragment: Fragment() {
 
-    private lateinit var mAccountViewModel: AccountViewmodel
+   // private lateinit var mAccountViewModel: AccountViewmodel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,8 +73,8 @@ Local database
     */
 
         //API
-//        llProgressBar.bringToFront()
- //       llProgressBar.visibility = View.VISIBLE
+        llProgressBarAddAccount.bringToFront()
+        llProgressBarAddAccount.visibility = View.VISIBLE
 
         val request = ServiceBuilder.buildService(AccountApi::class.java)
         val call = request.createAccount(
@@ -93,7 +86,7 @@ Local database
 
         call.enqueue(object : Callback<AccountDto> {
             override fun onResponse(call: Call<AccountDto>, response: Response<AccountDto>) {
-//                llProgressBar.visibility = View.GONE
+                llProgressBarAddAccount.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val report: AccountDto = response.body()!!
@@ -126,7 +119,7 @@ Local database
                 }
             }
             override fun onFailure(call: Call<AccountDto>, t: Throwable) {
-               // llProgressBar.visibility = View.GONE
+                llProgressBarAddAccount.visibility = View.GONE
                 somethingWentWrong()
             }
         })

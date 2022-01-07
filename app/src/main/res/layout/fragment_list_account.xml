@@ -103,7 +103,7 @@
         app:layout_constraintStart_toEndOf="@+id/bt_category" />
 
     <include
-        android:id="@+id/llProgressBar"
+        android:id="@+id/llProgressBarListAccount"
         layout="@layout/progressbar"
         android:layout_width="0dp"
         android:layout_height="0dp"

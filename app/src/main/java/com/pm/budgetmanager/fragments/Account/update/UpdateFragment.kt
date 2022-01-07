@@ -6,7 +6,6 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.pm.budgetmanager.API.dto.AccountDto
@@ -16,8 +15,6 @@ import com.pm.budgetmanager.R
 import com.pm.budgetmanager.Utils.Utils.Companion.getToken
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
-import com.pm.budgetmanager.data.Viewmodel.AccountViewmodel
-import com.pm.budgetmanager.data.entities.Accounts
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
 import retrofit2.Call

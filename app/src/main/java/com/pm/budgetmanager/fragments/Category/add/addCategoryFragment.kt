@@ -5,7 +5,6 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.pm.budgetmanager.API.dto.CategoryDto
 import com.pm.budgetmanager.API.requests.CategorysApi
@@ -15,8 +14,6 @@ import com.pm.budgetmanager.Utils.Utils.Companion.getToken
 import com.pm.budgetmanager.Utils.Utils.Companion.getUserIdInSession
 import com.pm.budgetmanager.Utils.Utils.Companion.somethingWentWrong
 import com.pm.budgetmanager.Utils.Utils.Companion.unauthorized
-import com.pm.budgetmanager.data.Viewmodel.CategoryViewmodel
-import com.pm.budgetmanager.data.entities.Category
 import kotlinx.android.synthetic.main.fragment_add_category.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +23,7 @@ import retrofit2.Response
 class addCategoryFragment : Fragment() {
 
 
-    private lateinit var mCategoryViewModel: CategoryViewmodel
+  //  private lateinit var mCategoryViewModel: CategoryViewmodel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +50,7 @@ class addCategoryFragment : Fragment() {
     }
 
     private fun addCategory(){
-        var transactionType: String = ""
+        var transactionType = ""
         when(radiogroup.checkedRadioButtonId){
             R.id.rb_earnings ->  transactionType = "earnings" //Toast.makeText(requireContext(),"Earnings selected",Toast.LENGTH_SHORT).show()
             R.id.rb_expenses -> transactionType = "expenses"//Toast.makeText(requireContext(),"expenses selected",Toast.LENGTH_SHORT).show()
@@ -80,6 +77,8 @@ class addCategoryFragment : Fragment() {
         findNavController().navigate(R.id.action_addCategoryFragment_to_listCategoryFragment)
     */
 
+            llProgressBarAddCategory.bringToFront()
+            llProgressBarAddCategory.visibility = View.VISIBLE
             val request = ServiceBuilder.buildService(CategorysApi::class.java)
             val call = request.createCategorys(
                 token = "Bearer ${getToken()}",
@@ -90,7 +89,7 @@ class addCategoryFragment : Fragment() {
 
             call.enqueue(object : Callback<CategoryDto> {
                 override fun onResponse(call: Call<CategoryDto>, response: Response<CategoryDto>) {
-                    //llProgressBar.visibility = View.GONE
+                    llProgressBarAddCategory.visibility = View.GONE
 
                     if (response.isSuccessful) {
                         val report: CategoryDto = response.body()!!
@@ -127,7 +126,7 @@ class addCategoryFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<CategoryDto>, t: Throwable) {
-                    // llProgressBar.visibility = View.GONE
+                    llProgressBarAddCategory.visibility = View.GONE
                     somethingWentWrong()
                     Toast.makeText(
                         requireContext(), "onFailure", Toast.LENGTH_LONG
@@ -137,10 +136,9 @@ class addCategoryFragment : Fragment() {
         }
     }
 
-
-
     private fun isValid(transactionType:String):Boolean {
-       return (TextUtils.isEmpty(et_nameCategory.text.toString()) || TextUtils.isEmpty(transactionType.toString()))
+       return (TextUtils.isEmpty(et_nameCategory.text.toString()) || TextUtils.isEmpty(
+           transactionType))
 
     }
 }

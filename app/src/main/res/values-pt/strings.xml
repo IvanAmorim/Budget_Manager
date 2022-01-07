@@ -65,4 +65,11 @@
     <string name="ony_edit_your_categorys">Edite apenas as suas categorias</string>
     <string name="only_edit_your_accounts">Edite apenas as suas contas</string>
     <string name="only_edit_your_transactions">Edite apenas as suas transações</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="next">Próximo</string>
+    <string name="previous">Anterior</string>
+    <string name="refresh">Atualizar</string>
+    <string name="username">"Nome "</string>
+    <string name="password">Palavra-pass</string>
+    <string name="sign_in">Log In</string>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".fragments.Transaction.list.ListTransactionsFragment">
 
     <include
-        android:id="@+id/llProgressBar"
+        android:id="@+id/llProgressBarListTransaction"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

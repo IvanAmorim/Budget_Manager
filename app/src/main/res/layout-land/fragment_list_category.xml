@@ -11,6 +11,18 @@
         android:layout_height="match_parent"
         tools:context=".fragments.Category.list.listCategoryFragment">
 
+        <include
+            android:id="@+id/llProgressBarListCategory"
+            layout="@layout/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_category"
             android:layout_width="match_parent"
