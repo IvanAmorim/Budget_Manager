@@ -16,6 +16,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
+
+
 class Maps : FragmentActivity(), OnMapReadyCallback {
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -49,20 +51,29 @@ class Maps : FragmentActivity(), OnMapReadyCallback {
         }
     }
     override fun onMapReady(googleMap: GoogleMap?) {
+
+
         val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
         val markerOptions = MarkerOptions().position(latLng).title("I am here!")
         googleMap?.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f))
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
         googleMap?.addMarker(markerOptions)
+
+        googleMap?.setOnMapClickListener(object :GoogleMap.OnMapClickListener {
+            override fun onMapClick(latlng :LatLng) {
+                val location = LatLng(latlng.latitude,latlng.longitude)
+                googleMap?.addMarker(MarkerOptions().position(location))
+            }
+        })
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>,
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             permissionCode -> if (grantResults.isNotEmpty() && grantResults[0] ==
-            PackageManager.PERMISSION_GRANTED) {
-            fetchLocation()
-        }
+                PackageManager.PERMISSION_GRANTED) {
+                fetchLocation()
+            }
         }
     }
 }
