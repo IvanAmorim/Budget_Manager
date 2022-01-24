@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/custom_button.xml" value="0.10925925925925926" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/english_background.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.240625" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/ic_baseline_language_24.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/inicialBackgrond_background.xml" value="0.240625" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/drawable/portuguese_background.xml" value="0.240625" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/layout-land/fragment_add_account.xml" value="0.1900352733686067" />
@@ -45,6 +49,7 @@
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/menu/menu.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/menu/nav_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/menu/save.xml" value="0.1" />
+        <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/mipmap-anydpi-v26/english_round.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/mipmap-anydpi-v26/inicialBackgrond.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/ivana/AndroidStudioProjects/BudgetManager/app/src/main/res/mipmap-anydpi-v26/portuguese_round.xml" value="0.240625" />
         <entry key="..\:/Users/ivana/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.10677083333333333" />

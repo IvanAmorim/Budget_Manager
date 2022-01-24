@@ -25,8 +25,10 @@ class Maps : FragmentActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
         fusedLocationProviderClient =  LocationServices.getFusedLocationProviderClient(this@Maps)
         fetchLocation()
+
     }
     private fun fetchLocation() {
         if (ActivityCompat.checkSelfPermission(
@@ -50,7 +52,9 @@ class Maps : FragmentActivity(), OnMapReadyCallback {
             }
         }
     }
-    override fun onMapReady(googleMap: GoogleMap?) {
+
+
+    override fun  onMapReady(googleMap: GoogleMap?) {
 
 
         val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)

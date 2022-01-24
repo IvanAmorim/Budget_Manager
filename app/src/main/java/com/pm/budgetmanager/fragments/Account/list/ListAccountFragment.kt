@@ -67,10 +67,7 @@ class ListAccountFragment : Fragment() {
 
         view.llProgressBarListAccount.bringToFront()
         view.llProgressBarListAccount.visibility = View.VISIBLE
-
-
         val adapter = ListAdapter(getUserIdInSession())
-
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -82,7 +79,6 @@ class ListAccountFragment : Fragment() {
             override fun onResponse(call: Call<List<Account>>, response: Response<List<Account>>) {
 
                 llProgressBarListAccount.visibility = View.GONE
-
                 if (response.isSuccessful) {
                     val reports: List<Account> = response.body()!!
                     adapter.setData(reports)
@@ -96,7 +92,6 @@ class ListAccountFragment : Fragment() {
                     }
                 }
             }
-
             override fun onFailure(call: Call<List<Account>>, t: Throwable) {
                 llProgressBarListAccount.visibility = View.GONE
                 somethingWentWrong()

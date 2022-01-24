@@ -5,7 +5,9 @@
     <queries>
         <package android:name="com.google.android.apps.maps" />
     </queries>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -32,6 +34,6 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCiSh4VnnI1jemtZTytDoj2X7Wl6evey30" />
+            android:value="AIzaSyBxIsz4Tenjo80Z_KZ5zWAkWO2kaCphyVY" />
     </application>
 </manifest>

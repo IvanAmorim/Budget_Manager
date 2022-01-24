@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragmentContainerView)
+        override fun onSupportNavigateUp(): Boolean {
+            val navController = findNavController(R.id.fragmentContainerView)
 
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
+            return navController.navigateUp() || super.onSupportNavigateUp()
+        }
 
     private fun setLocale(localeName: String) {
         if (localeName != currentLanguage) {

@@ -48,7 +48,20 @@ class AddAccountFragment: Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    /*
+Local database
 
+    mAccountViewModel.addAccount(account)
+
+    Toast.makeText(
+        requireContext(),
+        "Product successfuly added.",
+        Toast.LENGTH_LONG
+    ).show()
+
+    findNavController().navigate(R.id.action_addAccountFragment_to_listAccountFragment)
+*/
+    //API
     private fun addAccount(){
         if(isValid()){
             return Toast.makeText(
@@ -57,22 +70,6 @@ class AddAccountFragment: Fragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
-
-        /*
-Local database
-
-        mAccountViewModel.addAccount(account)
-
-        Toast.makeText(
-            requireContext(),
-            "Product successfuly added.",
-            Toast.LENGTH_LONG
-        ).show()
-
-        findNavController().navigate(R.id.action_addAccountFragment_to_listAccountFragment)
-    */
-
-        //API
         llProgressBarAddAccount.bringToFront()
         llProgressBarAddAccount.visibility = View.VISIBLE
 
